@@ -1,0 +1,39 @@
+# Unreal Engine
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+*.VC.db
+*.opensdf
+*.opendb
+*.sdf
+*.sln
+*.suo
+*.xcworkspace
+*.xcodeproj
+
+# Visual Studio
+.vs/
+.vscode/
+
+# Rider / JetBrains
+.idea/
+*.DotSettings.user
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Compiled objects
+*.o
+*.obj
+*.pdb
+
+# Unreal build files
+*.target
+FileOpenOrder/
+
+# Content — uncomment if you want to exclude large assets
+# Content/
