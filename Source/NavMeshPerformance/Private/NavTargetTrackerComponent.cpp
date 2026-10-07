@@ -142,9 +142,9 @@ void UNavTargetTrackerComponent::TickComponent(float DeltaTime,
 
 	case EPathfindingMode::Async:
 		{
-			// BEST: Launch a background path request if none is in flight.
-			// The Game Thread is never blocked — OnPathFound writes the cache
-			// when the background thread completes the query.
+			// ASYNC VARIANT: Launch a path request if none is in flight.
+			// Query processing is scheduled asynchronously; OnPathFound updates the cache
+			// when the result becomes available.
 			if (AsyncPathRequestId == FAIRequestID::InvalidRequest)
 			{
 				RequestAsyncPath();
@@ -237,8 +237,8 @@ void UNavTargetTrackerComponent::RequestAsyncPath()
 	                        GetOwner()->GetActorLocation(),
 	                        NavTarget->GetActorLocation());
 
-	// Launch the async request. OnPathFound will be called on the Game Thread
-	// when the background navigation thread completes the query.
+	// Queue the request for asynchronous path processing.
+	// OnPathFound receives the result later through the delegate callback.
 	AsyncPathRequestId = NavSystem->FindPathAsync(AgentProps,
 	                                              Query,
 	                                              FNavPathQueryDelegate::CreateUObject(this,
